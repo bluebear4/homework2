@@ -148,7 +148,8 @@ public:
 	}
 	fraction operator-(const fraction& a) {
 		try {
-			return fraction(up - a.up, down - a.down);
+
+			return fraction(up * a.down - a.up * down, down * a.down);
 		}
 		catch (const char* msg) {
 			cerr << msg << endl;
