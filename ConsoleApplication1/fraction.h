@@ -109,7 +109,6 @@ public:
 		up = other.up;
 		down = other.down;
 	}
-
 	fraction() {}
 	fraction(long long _up, long long _down) : up(_up), down(_down) {
 		if (_down == 0) {
@@ -190,14 +189,17 @@ public:
 			cerr << msg << endl;
 		}
 	}
-	bool operator<(const fraction& a) {
+	bool operator<(const fraction& a)const {
 		return up * a.down < down * a.up;
 	}
-	bool operator>(const fraction& a) {
+	bool operator>(const fraction& a)const {
 		return up * a.down > down * a.up;
 	}
-	bool operator==(const fraction& a) {
+	bool operator==(const fraction& a)const {
 		return up * a.down == down * a.up;
+	}
+	bool operator!=(const fraction& a) const {
+		return up * a.down != down * a.up;
 	}
 	string toString() {
 		if (up == -1 && down == -1) {

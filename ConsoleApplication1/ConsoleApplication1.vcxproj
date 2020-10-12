@@ -152,7 +152,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="expression.cpp" />
     <ClCompile Include="四则运算.cpp" />
   </ItemGroup>
   <ItemGroup>

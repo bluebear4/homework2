@@ -122,6 +122,16 @@ class expression
 	}
 
 public:
+	 bool operator <(const expression & other)const {
+		 
+		if (ans != other.ans) return ans < other.ans;
+		multiset<fraction> a(nums.begin(), nums.end());
+		multiset<fraction> b(other.nums.begin(), other.nums.end());
+		if (a != b) return a < b;
+		multiset<char> c(chars.begin(), chars.end());
+		multiset<char> d(other.chars.begin(), other.chars.end());
+		return c < d;
+	}
 	expression(long long limit) {
 		int cnt = rand() % (numberLimit - 1) + 2;
 
