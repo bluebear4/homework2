@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1259
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{9F49B077-C00A-4E69-ADF1-B32B180B82AC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "四则运算", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{9F49B077-C00A-4E69-ADF1-B32B180B82AC}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
@@ -27,5 +30,11 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F02335BA-675A-4FE9-B7F6-8C64AF98DA44}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

@@ -43,7 +43,9 @@ void Test3() {
 }
 bool check(string my, string std, string nowPath) {
 	if ((!my.empty() && std.empty()) || (my.empty() && !std.empty())) {
-		cout << "please input 2 file path to check. e.g. -e <exercisefile>.txt -a <answerfile>.txt" << endl;
+		cout << "please input 2 file path to check. e.g. -e <exercisefile>.txt "
+			"-a <answerfile>.txt"
+			<< endl;
 		system("pause");
 		return 0;
 	}
@@ -83,8 +85,7 @@ bool check(string my, string std, string nowPath) {
 		return 0;
 	}
 	vector<int> Correct, Wrong;
-	for (size_t i = 0; i < myans.size(); i++)
-	{
+	for (size_t i = 0; i < myans.size(); i++) {
 		if (myans[i] == stdans[i]) {
 			Correct.emplace_back(i + 1);
 		}
@@ -94,34 +95,32 @@ bool check(string my, string std, string nowPath) {
 	}
 	GradeFile << "Correct: ";
 	GradeFile << Correct.size();
-	if (Correct.size())GradeFile << " (";
-	for (size_t i = 0; i < Correct.size(); i++)
-	{
+	if (Correct.size()) GradeFile << " (";
+	for (size_t i = 0; i < Correct.size(); i++) {
 		GradeFile << Correct[i] << " )"[i + 1 == Correct.size()];
 	}
 	GradeFile << endl;
 
 	GradeFile << "Wrong: ";
 	GradeFile << Wrong.size();
-	if (Wrong.size())GradeFile << " (";
-	for (size_t i = 0; i < Wrong.size(); i++)
-	{
+	if (Wrong.size()) GradeFile << " (";
+	for (size_t i = 0; i < Wrong.size(); i++) {
 		GradeFile << Wrong[i] << " )"[i + 1 == Wrong.size()];
 	}
 	GradeFile << endl;
 	return 1;
 }
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 	srand(time(0));
 	string nowPath = argv[0];
-	nowPath.erase(nowPath.begin() + nowPath.find_last_of("\\\\"), nowPath.end());
-	
+	nowPath.erase(nowPath.begin() + nowPath.find_last_of("\\\\"),
+		nowPath.end());
+	//获取当前文件路径
 	int cnt = -1;
-	long long limit = 100;//默认100
+	long long limit = 100;  //默认100
 	string my, std;
-	for (size_t i = 0; i < argc; i++)
-	{
+	//命令行参数检查
+	for (size_t i = 0; i < argc; i++) {
 		if (strcmp(argv[i], "-n") == 0) {
 			if (i + 1 >= argc || !isdigit(argv[i + 1][0])) {
 				cout << "please input a positive integer after -n" << endl;
@@ -134,7 +133,8 @@ int main(int argc, char const *argv[])
 		}
 		if (strcmp(argv[i], "-r") == 0) {
 			if (i + 1 >= argc || !isdigit(argv[i + 1][0])) {
-				cout << "please input a positive integer more than 1 after -r" << endl;
+				cout << "please input a positive integer more than 1 after -r"
+					<< endl;
 				system("pause");
 				return 0;
 			}
@@ -144,7 +144,8 @@ int main(int argc, char const *argv[])
 		}
 		if (strcmp(argv[i], "-r") == 0) {
 			if (i + 1 >= argc || !isdigit(argv[i + 1][0])) {
-				cout << "please input a positive integer more than 1 after -r" << endl;
+				cout << "please input a positive integer more than 1 after -r"
+					<< endl;
 				system("pause");
 				return 0;
 			}
@@ -186,6 +187,7 @@ int main(int argc, char const *argv[])
 		system("pause");
 		return 0;
 	}
+	//打开文件
 	ofstream exFile(nowPath + "\\Exercises.txt");
 	if (exFile.fail()) {
 		cout << "can't open file Exercises.txt" << endl;
@@ -198,11 +200,12 @@ int main(int argc, char const *argv[])
 		system("pause");
 		return 0;
 	}
+	//生成并去重
 	set<expression> ex;
-	while (ex.size() < cnt)
-	{
+	while (ex.size() < cnt) {
 		ex.insert(expression(limit));
 	}
+	//输出到文件
 	int id = 1;
 	for (auto it : ex) {
 		exFile << id << "." << it.toString() << endl;

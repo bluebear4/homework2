@@ -29,6 +29,7 @@ class expression
 		}
 	}
 	fraction cal(fraction&a, fraction &b, char op) {
+		//与NAN计算 结果仍为NAN
 		if (a.toString() == "NAN" || b.toString() == "NAN")
 			return fraction();
 		if (op == '+') return a + b;
@@ -36,6 +37,7 @@ class expression
 		if (op == '*') return a * b;
 		if (op == '/') {
 			if (b == fraction("0")) {
+				//除0 结果为NAN
 				return fraction();
 			}
 			return a / b;
@@ -114,6 +116,7 @@ class expression
 				que.pop();
 				stk.push(cal(a, b, c));
 				if (stk.top() < fraction("0")) {
+					//出现负数 返回NAN
 					return fraction();
 				}
 			}
@@ -139,15 +142,17 @@ public:
 			brackets.first = rand() % (cnt - 1);
 			brackets.second = rand() % (cnt - brackets.first - 1) + brackets.first + 1;
 		}
+		//生成操作数
 		for (int i = 0; i < cnt; i++)
 		{
 			nums.emplace_back(limit);
 		}
+		//生成操作符
 		for (int i = 0; i < cnt - 1; i++)
 		{
 			chars.emplace_back(ops[rand() % 4]);
 		}
-
+		//生成表达式
 		for (int i = 0; i < cnt; i++)
 		{
 			if (i == brackets.first)  exp += '(';
@@ -157,8 +162,10 @@ public:
 			if (i == brackets.second)  exp += ')';
 			if (i < cnt - 1) exp += chars[i];
 		}
+		//解析表达式求值
 		ans = calAns();
 		if (ans.toString() == "NAN") {
+			//答案不是数字 重新生成
 			*this = expression(limit);
 		}
 	}
