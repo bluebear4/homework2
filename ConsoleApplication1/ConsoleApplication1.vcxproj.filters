@@ -18,9 +18,15 @@
     <ClCompile Include="四则运算.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="expression.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fraction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="expression.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

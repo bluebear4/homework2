@@ -96,18 +96,38 @@ class fraction {
 		}
 		return a;
 	}
-	long long up;
-	long long down;
+	static long long Rand(long long limit) {
+		long long res = long long(rand() * 1.0 / RAND_MAX * limit);
+		while (res == limit)res = long long(rand() * 1.0 / RAND_MAX * limit);
+		return res;
+	}
+	long long up = -1;
+	long long down = -1;
 
 public:
+	fraction(const fraction &other) {
+		up = other.up;
+		down = other.down;
+	}
+
+	fraction() {}
 	fraction(long long _up, long long _down) : up(_up), down(_down) {
 		if (_down == 0) {
 			throw "can't divide zero!";
 		}
-			long long GCD = gcd(up, down);
-			up /= GCD;
-			down /= GCD;
-		
+		long long GCD = gcd(up, down);//化简
+		up /= GCD;
+		down /= GCD;
+	}
+	fraction(long long limit) {//随机生成上界
+		if (Rand(2) || limit == 1) {//整数
+			*this = fraction(Rand(limit), 1);
+		}
+		else {//分数
+			long long down = Rand(limit);
+			while (down == 0)down = Rand(limit);
+			*this = fraction(Rand(limit), down);
+		}
 	}
 	fraction(const string& s) {
 		int pos1 = s.find("'");
@@ -123,13 +143,13 @@ public:
 		else {  //分数
 			long long up = 0, down = stoll(s.substr(pos2 + 1));
 			if (pos1 != string::npos) {
-				up += down * stoll(s.substr(pos1 + 1, pos2 - 1 - pos1));
+				up += down * stoll(s.substr(0, pos1));
 			}
 			else {
-				pos1 = pos2;
+				pos1 = -1;
 			}
 
-			up += stoll(s.substr(0, pos1));
+			up += stoll(s.substr(pos1 + 1, pos2 - pos1 - 1));
 			try {
 				*this = fraction(up, down);
 			}
@@ -148,7 +168,6 @@ public:
 	}
 	fraction operator-(const fraction& a) {
 		try {
-
 			return fraction(up * a.down - a.up * down, down * a.down);
 		}
 		catch (const char* msg) {
@@ -172,15 +191,17 @@ public:
 		}
 	}
 	bool operator<(const fraction& a) {
-		return up * 1.0 / down < a.up * 1.0 / a.down;
+		return up * a.down < down * a.up;
 	}
 	bool operator>(const fraction& a) {
-		return up * 1.0 / down > a.up * 1.0 / a.down;
+		return up * a.down > down * a.up;
 	}
-	bool operator==(const fraction& a) { return up == a.up && down == a.down; }
+	bool operator==(const fraction& a) {
+		return up * a.down == down * a.up;
+	}
 	string toString() {
 		if (up == -1 && down == -1) {
-			return "Not a Number!";
+			return "NAN";
 		}
 		if (down == 1) {  // 5/1 --> 5 0/1 --> 0
 			return to_string(up);
