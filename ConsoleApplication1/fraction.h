@@ -115,6 +115,7 @@ public:
 			throw "can't divide zero!";
 		}
 		long long GCD = gcd(up, down);//»¯¼ò
+		if (GCD < 0) GCD *= -1;
 		up /= GCD;
 		down /= GCD;
 	}
@@ -208,11 +209,11 @@ public:
 		if (down == 1) {  // 5/1 --> 5 0/1 --> 0
 			return to_string(up);
 		}
-		if (up < down) {  // 3/5 --> 3/5
+		if (up / down == 0) {  // 3/5 --> 3/5
 			return to_string(up) + "/" + to_string(down);
 		}
 		// 5/2 --> 2'1/2
-		return to_string(up / down) + "'" + to_string(up % down) + "/" +
-			to_string(down);
+		return to_string(up / down) + "'" + to_string(abs(up) % abs(down)) + "/" +
+			to_string(abs(down));
 	}
 };
